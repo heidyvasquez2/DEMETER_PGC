@@ -7,37 +7,41 @@ import androidx.navigation.compose.NavHost
 
 @Composable
 fun NavigationApp() {
-    val myNavController = rememberNavController()
+    val myNavController    = rememberNavController()
     val myStartDestination = "login"
 
     NavHost(
-        navController = myNavController,
+        navController    = myNavController,
         startDestination = myStartDestination,
     ) {
         composable("login") {
-            LoginScreen(onClickRegister = {
-                myNavController.navigate("register")
-            }, onSuccessfulLogin ={
-                myNavController.navigate("home"){
-                    popUpTo("login"){
-                        inclusive = true
-                    }
-                }
-            })
-        }
-        composable("register") {
-            RegisterScreen(
-                onClickBack = {
-                    myNavController.popBackStack()
-                }, onSuccessfullRegister = {
+            LoginScreen(
+                onClickRegister   = { myNavController.navigate("register") },
+                onSuccessfulLogin = {
                     myNavController.navigate("home") {
-                        popUpTo(0)
+                        popUpTo("login") { inclusive = true }
                     }
                 }
             )
         }
+        composable("register") {
+            RegisterScreen(
+                onClickBack           = { myNavController.popBackStack() },
+                onSuccessfullRegister = {
+                    myNavController.navigate("home") { popUpTo(0) }
+                }
+            )
+        }
         composable("home") {
-            HomeScreen()
+            HomeScreen(
+                onNavigateToClassifier = { myNavController.navigate("animal-classifier") }
+            )
+        }
+        // 🆕 Pantalla del clasificador de animales
+        composable("animal-classifier") {
+            AnimalScreen(
+                onClickBack = { myNavController.popBackStack() }
+            )
         }
     }
 }

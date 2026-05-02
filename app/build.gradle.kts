@@ -38,6 +38,10 @@ android {
     buildFeatures {
         compose = true
     }
+    // Evita comprimir el modelo .tflite
+    androidResources {
+        noCompress += "tflite"
+    }
 }
 
 dependencies {
@@ -62,4 +66,15 @@ dependencies {
 
     //firebase
     implementation(platform(libs.firebase.bom))
+
+    // TensorFlow Lite
+    implementation(libs.tensorflow.lite)
+    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.lite.metadata)
+
+    // CameraX
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
 }
