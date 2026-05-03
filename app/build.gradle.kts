@@ -66,9 +66,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
 
     // TensorFlow Lite
-    implementation(libs.tensorflow.lite)
-    implementation(libs.tensorflow.lite.support)
-    implementation(libs.tensorflow.lite.metadata)
+    implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.3")
 
     // CameraX
     implementation(libs.androidx.camera.core)
